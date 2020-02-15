@@ -4,6 +4,8 @@
 # Stefan Wendler, sw@kaltpost.de
 ##
 
+OPENCM3_DIR	?= ../../../libopencm3
+
 # compiler prefix
 ifeq ($(TARCH),MSP430)
 PREFIX  ?= msp430-
@@ -18,8 +20,8 @@ ifeq ($(TARCH),MSP430)
 INCDIR		+= -I./include 
 CFLAGS		+= -Os -g -mmcu=msp430g2553 -Wall -Wextra $(INCDIR) 
 else
-INCDIR		+= -I./include -I$(HOME)/sat/arm-none-eabi/include
-CFLAGS		+= -Os -g -Wall -Wextra -fno-common -mcpu=cortex-m3 -mthumb -msoft-float -MD $(INCDIR) -DSTM32F1
+INCDIR		+= -I./include -I$(OPENCM3_DIR)/include
+CFLAGS		+= -Os -g -Wall -Wextra -fno-common -mcpu=cortex-m3 -mthumb -msoft-float -MD $(INCDIR) -DSTM32F1 -lc -lgcc
 endif
 
 ARFLAGS		 = rcs
